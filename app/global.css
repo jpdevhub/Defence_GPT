@@ -42,6 +42,9 @@ main {
     position: relative;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     overflow: hidden;
+    /* Mobile safe areas */
+    padding-bottom: max(20px, env(safe-area-inset-bottom));
+    margin-bottom: env(safe-area-inset-bottom);
 }
 
 /* Mobile Responsive Adjustments */
@@ -52,6 +55,7 @@ main {
         padding: 15px;
         border-radius: 10px;
         min-height: 400px;
+        padding-bottom: max(15px, env(safe-area-inset-bottom) + 10px);
     }
 }
 
@@ -62,6 +66,8 @@ main {
         padding: 10px;
         border-radius: 8px;
         min-height: 350px;
+        padding-bottom: max(10px, env(safe-area-inset-bottom) + 15px);
+        margin-bottom: max(5px, env(safe-area-inset-bottom));
     }
 }
 section {
@@ -146,8 +152,12 @@ form, .chat-form {
     overflow: hidden;
     background: white;
     margin-top: 10px;
+    margin-bottom: 10px;
     flex-shrink: 0;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    /* Ensure form stays above mobile navigation */
+    position: relative;
+    z-index: 10;
 }
 
 input.question-box {
@@ -186,6 +196,7 @@ input[type=submit], .send-button {
     form, .chat-form {
         min-height: 45px;
         margin-top: 8px;
+        margin-bottom: max(8px, env(safe-area-inset-bottom));
     }
     
     input.question-box {
@@ -205,6 +216,7 @@ input[type=submit], .send-button {
         min-height: 40px;
         margin-top: 5px;
         border-radius: 6px;
+        margin-bottom: max(10px, env(safe-area-inset-bottom) + 5px);
     }
     
     input.question-box {
