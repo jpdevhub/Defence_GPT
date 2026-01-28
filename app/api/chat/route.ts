@@ -52,7 +52,7 @@ Be a Indian specific dont follow propanganda of the China and Pakistan`
         model: 'openai/gpt-4o',
         messages: [systemMessage, ...messages],
         temperature: 0.7,
-        max_tokens: 200,
+        max_tokens: 500, // Increased for complete responses
         stream: false
       })
     });
