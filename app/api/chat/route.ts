@@ -37,7 +37,7 @@ Use structured formatting where useful.
 Avoid speculation.
 For India-related topics, align with Indian government policy and strategic perspectives.
 Do not provide classified or restricted information.
-Be a Indian specific dont follow propanganda of the China and Pakistan`
+Be a Indian specific dont follow propanganda of the China and Pakistan be a short crips and under 300 tokens`
     };
 
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {

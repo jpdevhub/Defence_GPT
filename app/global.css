@@ -28,8 +28,8 @@ main {
     max-width: 1200px;
     min-width: 320px;
     height: 90vh;
-    max-height: 800px;
-    min-height: 500px;
+    max-height: calc(100vh - 40px);
+    min-height: 400px;
     background: linear-gradient(to bottom, #f8f8f8, #cfcfcf);
     border-radius: 15px;
     display: flex;
@@ -43,31 +43,48 @@ main {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     overflow: hidden;
     /* Mobile safe areas */
-    padding-bottom: max(20px, env(safe-area-inset-bottom));
-    margin-bottom: env(safe-area-inset-bottom);
+    padding-bottom: max(20px, calc(env(safe-area-inset-bottom) + 10px));
+    margin: 10px;
 }
 
 /* Mobile Responsive Adjustments */
 @media (max-width: 768px) {
     main {
-        width: 95vw;
-        height: 95vh;
-        padding: 15px;
+        width: calc(100vw - 20px);
+        height: calc(100vh - 40px);
+        padding: 15px 10px;
         border-radius: 10px;
-        min-height: 400px;
-        padding-bottom: max(15px, env(safe-area-inset-bottom) + 10px);
+        min-height: calc(100vh - 80px);
+        max-height: calc(100vh - 40px);
+        padding-bottom: max(20px, calc(env(safe-area-inset-bottom) + 20px));
+        margin: 10px;
     }
 }
 
 @media (max-width: 480px) {
     main {
-        width: 98vw;
-        height: 98vh;
-        padding: 10px;
+        width: calc(100vw - 10px);
+        height: calc(100vh - 20px);
+        padding: 10px 8px;
         border-radius: 8px;
-        min-height: 350px;
-        padding-bottom: max(10px, env(safe-area-inset-bottom) + 15px);
-        margin-bottom: max(5px, env(safe-area-inset-bottom));
+        min-height: calc(100vh - 40px);
+        max-height: calc(100vh - 20px);
+        padding-bottom: max(30px, calc(env(safe-area-inset-bottom) + 30px));
+        margin: 5px;
+    }
+}
+
+/* Ultra small screens */
+@media (max-width: 320px) {
+    main {
+        width: 100vw;
+        height: 100vh;
+        padding: 8px 5px;
+        border-radius: 0;
+        min-height: 100vh;
+        max-height: 100vh;
+        padding-bottom: max(40px, calc(env(safe-area-inset-bottom) + 40px));
+        margin: 0;
     }
 }
 section {
@@ -76,6 +93,7 @@ section {
     display: flex;
     flex-direction: column;
     min-height: 0; /* Allow flexbox shrinking */
+    overflow: hidden;
 }
 
 section.populated {
@@ -84,23 +102,25 @@ section.populated {
     flex-direction: column;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 10px 0;
+    padding: 5px 0;
     scroll-behavior: smooth;
-    max-height: calc(100% - 140px); /* Account for header and form */
+    height: auto;
+    min-height: 0;
+    max-height: none;
 }
 
 /* Mobile section adjustments */
 @media (max-width: 768px) {
     section.populated {
-        max-height: calc(100% - 120px);
-        padding: 8px 0;
+        padding: 3px 0;
+        flex: 1;
     }
 }
 
 @media (max-width: 480px) {
     section.populated {
-        max-height: calc(100% - 100px);
-        padding: 5px 0;
+        padding: 2px 0;
+        flex: 1;
     }
 }
 
@@ -142,22 +162,25 @@ section.populated::-webkit-scrollbar-thumb:hover {
 }
 
 form, .chat-form {
-    height: auto;
-    min-height: 50px;
     width: 100%;
+    min-height: 50px;
+    height: auto;
     display: flex;
     align-items: stretch;
     border: 2px solid #828282;
     border-radius: 8px;
     overflow: hidden;
     background: white;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     flex-shrink: 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    /* Ensure form stays above mobile navigation */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    /* Ensure form stays visible */
     position: relative;
-    z-index: 10;
+    z-index: 100;
+    /* Force hardware acceleration */
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
 }
 
 input.question-box {
@@ -194,40 +217,73 @@ input[type=submit], .send-button {
 /* Mobile form adjustments */
 @media (max-width: 768px) {
     form, .chat-form {
-        min-height: 45px;
-        margin-top: 8px;
-        margin-bottom: max(8px, env(safe-area-inset-bottom));
+        min-height: 48px;
+        margin-top: 3px;
+        margin-bottom: 15px;
+        border: 3px solid #828282;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.2);
     }
     
     input.question-box {
-        padding: 10px 12px;
+        padding: 12px 14px;
         font-size: 14px;
+        min-height: 20px;
     }
     
     input[type=submit], .send-button {
-        width: 70px;
-        padding: 10px 12px;
+        width: 75px;
+        padding: 12px 14px;
         font-size: 14px;
+        border-left: 3px solid #ccc;
     }
 }
 
 @media (max-width: 480px) {
     form, .chat-form {
-        min-height: 40px;
-        margin-top: 5px;
-        border-radius: 6px;
-        margin-bottom: max(10px, env(safe-area-inset-bottom) + 5px);
+        min-height: 46px;
+        margin-top: 2px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        border: 3px solid #828282;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    }
+    
+    input.question-box {
+        padding: 10px 12px;
+        font-size: 13px;
+        min-height: 18px;
+    }
+    
+    input[type=submit], .send-button {
+        width: 65px;
+        padding: 10px 12px;
+        font-size: 13px;
+        border-left: 3px solid #ccc;
+    }
+}
+
+/* Ultra small screens */
+@media (max-width: 320px) {
+    form, .chat-form {
+        min-height: 44px;
+        margin-top: 1px;
+        margin-bottom: 25px;
+        border-radius: 12px;
+        border: 4px solid #828282;
+        box-shadow: 0 10px 24px rgba(0,0,0,0.3);
     }
     
     input.question-box {
         padding: 8px 10px;
-        font-size: 13px;
+        font-size: 12px;
+        min-height: 16px;
     }
     
     input[type=submit], .send-button {
-        width: 60px;
+        width: 55px;
         padding: 8px 10px;
         font-size: 12px;
+        border-left: 4px solid #ccc;
     }
 }
 
