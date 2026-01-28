@@ -24,8 +24,6 @@ cp .env.example .env
 npm run dev
 ```
 
-Visit [localhost:3000](http://localhost:3000)
-
 ## 📁 Architecture
 
 ```
